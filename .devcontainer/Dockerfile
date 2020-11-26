@@ -3,7 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-FROM golang:1.14.4 as base
+FROM golang:1.15.5 as base
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -92,7 +92,7 @@ ENV DEBIAN_FRONTEND=dialog
 # Add terraform
 FROM base
 
-ENV versionTerraform=0.12.28
+ENV versionTerraform=0.13.5
 
 RUN apt-get update \
     && apt-get -y install \
@@ -102,4 +102,3 @@ RUN apt-get update \
     curl -sSL -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${versionTerraform}/terraform_${versionTerraform}_linux_amd64.zip 2>&1 && \
     unzip -d /usr/local/bin /tmp/terraform.zip \
     && mkdir -p /root/.terraform.d/plugins
-
